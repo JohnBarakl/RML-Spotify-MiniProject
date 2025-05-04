@@ -1,0 +1,308 @@
+@prefix : <http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#> .
+
+<http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://musicbrainz.org/artist#type
+<http://musicbrainz.org/artist#type> rdf:type owl:ObjectProperty ;
+                                     owl:equivalentProperty :isGroup ,
+                                                            :isSoloArtist .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#contains
+:contains rdf:type owl:ObjectProperty ;
+          owl:inverseOf :isPartOf ;
+          rdfs:domain :SpotifyCollection ;
+          rdfs:range :SpotifyTrack .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#hasSpotifyEntry
+:hasSpotifyEntry rdf:type owl:ObjectProperty ;
+                 rdfs:domain :MusicBrainzClasses ;
+                 rdfs:range :SpotifyEntry .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#isGroup
+:isGroup rdf:type owl:ObjectProperty ;
+         rdfs:domain <http://musicbrainz.org/artist> ;
+         rdfs:range <http://purl.org/ontology/mo/MusicGroup> .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#isPartOf
+:isPartOf rdf:type owl:ObjectProperty ;
+          rdfs:domain :SpotifyTrack ;
+          rdfs:range :SpotifyCollection .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#isSoloArtist
+:isSoloArtist rdf:type owl:ObjectProperty ;
+              rdfs:domain <http://musicbrainz.org/artist> ;
+              rdfs:range <http://purl.org/ontology/mo/SoloMusicArtist> .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#made
+:made rdf:type owl:ObjectProperty ;
+      owl:inverseOf :madeBy ;
+      rdfs:domain :SpotifyArtist ;
+      rdfs:range :SpotifyTrack .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#madeBy
+:madeBy rdf:type owl:ObjectProperty ;
+        rdfs:domain :SpotifyTrack ;
+        rdfs:range :SpotifyArtist .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#mostPlayedArtist
+:mostPlayedArtist rdf:type owl:ObjectProperty ;
+                  rdfs:domain :SpotifyUser ;
+                  rdfs:range <http://musicbrainz.org/artist> .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#released
+:released rdf:type owl:ObjectProperty ;
+          owl:inverseOf :releasedBy ;
+          rdfs:domain :SpotifyArtist ;
+          rdfs:range :SpotifyAlbum .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#releasedBy
+:releasedBy rdf:type owl:ObjectProperty ;
+            rdfs:domain :SpotifyAlbum ;
+            rdfs:range :SpotifyArtist .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#age
+:age rdf:type owl:DatatypeProperty ;
+     rdfs:domain :SpotifyUser ;
+     rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#artistFollowers
+:artistFollowers rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SpotifyArtist ;
+                 rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#artistPopularity
+:artistPopularity rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :SpotifyArtist ;
+                  rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#country
+:country rdf:type owl:DatatypeProperty ;
+         rdfs:domain :SpotifyUser ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#danceability
+:danceability rdf:type owl:DatatypeProperty ;
+              rdfs:domain :SpotifyTrack ;
+              rdfs:range xsd:double .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#explicit
+:explicit rdf:type owl:DatatypeProperty ;
+          rdfs:domain :SpotifyTrack ;
+          rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#listeningTime
+:listeningTime rdf:type owl:DatatypeProperty ;
+               rdfs:domain :SpotifyUser ;
+               rdfs:range [ rdf:type rdfs:Datatype ;
+                            owl:oneOf [ rdf:type rdf:List ;
+                                        rdf:first "Afternoon" ;
+                                        rdf:rest [ rdf:type rdf:List ;
+                                                   rdf:first "Morning" ;
+                                                   rdf:rest [ rdf:type rdf:List ;
+                                                              rdf:first "Night" ;
+                                                              rdf:rest rdf:nil
+                                                            ]
+                                                 ]
+                                      ]
+                          ] .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#minutesStreamed
+:minutesStreamed rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :SpotifyUser ;
+                 rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#releaseDate
+:releaseDate rdf:type owl:DatatypeProperty ;
+             rdfs:domain :SpotifyTrack ;
+             rdfs:range xsd:dateTime .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#spotifyUri
+:spotifyUri rdf:type owl:DatatypeProperty ;
+            rdfs:domain :SpotifyEntry ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#subType
+:subType rdf:type owl:DatatypeProperty ;
+         rdfs:domain :SpotifyUser ;
+         rdfs:range [ rdf:type rdfs:Datatype ;
+                      owl:oneOf [ rdf:type rdf:List ;
+                                  rdf:first "Free" ;
+                                  rdf:rest [ rdf:type rdf:List ;
+                                             rdf:first "Premium" ;
+                                             rdf:rest rdf:nil
+                                           ]
+                                ]
+                    ] .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#topGenre
+:topGenre rdf:type owl:DatatypeProperty ;
+          rdfs:domain :SpotifyUser .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#totalLikes
+:totalLikes rdf:type owl:DatatypeProperty ;
+            rdfs:domain :SpotifyUser ;
+            rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#trackName
+:trackName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :SpotifyTrack ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#trackNumber
+:trackNumber rdf:type owl:DatatypeProperty ;
+             rdfs:domain :SpotifyCollection ;
+             rdfs:range xsd:integer .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://musicbrainz.org/artist
+<http://musicbrainz.org/artist> rdf:type owl:Class ;
+                                rdfs:subClassOf :MusicBrainzClasses .
+
+
+###  http://musicbrainz.org/track
+<http://musicbrainz.org/track> rdf:type owl:Class ;
+                               rdfs:subClassOf :MusicBrainzClasses .
+
+
+###  http://purl.org/ontology/mo/MusicGroup
+<http://purl.org/ontology/mo/MusicGroup> rdf:type owl:Class .
+
+
+###  http://purl.org/ontology/mo/SoloMusicArtist
+<http://purl.org/ontology/mo/SoloMusicArtist> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#Group
+:Group rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( <http://musicbrainz.org/artist>
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <http://musicbrainz.org/artist#type> ;
+                                                    owl:allValuesFrom <http://purl.org/ontology/mo/MusicGroup>
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#MusicBrainzClasses
+:MusicBrainzClasses rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SoloArtist
+:SoloArtist rdf:type owl:Class ;
+            owl:equivalentClass [ owl:intersectionOf ( <http://musicbrainz.org/artist>
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://musicbrainz.org/artist#type> ;
+                                                         owl:allValuesFrom <http://purl.org/ontology/mo/SoloMusicArtist>
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SpotifyAlbum
+:SpotifyAlbum rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Restriction ;
+                                    owl:onProperty :releasedBy ;
+                                    owl:someValuesFrom :SpotifyArtist
+                                  ] ;
+              rdfs:subClassOf :SpotifyCollection .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SpotifyArtist
+:SpotifyArtist rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Class ;
+                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :made ;
+                                                     owl:someValuesFrom :SpotifyTrack
+                                                   ]
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :released ;
+                                                     owl:someValuesFrom :SpotifyAlbum
+                                                   ]
+                                                 )
+                                   ] ;
+               rdfs:subClassOf :SpotifyEntry .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SpotifyCollection
+:SpotifyCollection rdf:type owl:Class ;
+                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                         owl:onProperty :trackNumber ;
+                                         owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                              owl:onDatatype xsd:integer ;
+                                                              owl:withRestrictions ( [ xsd:minExclusive 0
+                                                                                     ]
+                                                                                   )
+                                                            ]
+                                       ] ;
+                   rdfs:subClassOf :SpotifyEntry .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SpotifyEntry
+:SpotifyEntry rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SpotifyPlaylist
+:SpotifyPlaylist rdf:type owl:Class ;
+                 rdfs:subClassOf :SpotifyCollection .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SpotifyTrack
+:SpotifyTrack rdf:type owl:Class ;
+              owl:equivalentClass [ rdf:type owl:Restriction ;
+                                    owl:onProperty :madeBy ;
+                                    owl:someValuesFrom :SpotifyArtist
+                                  ] ;
+              rdfs:subClassOf :SpotifyEntry .
+
+
+###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#SpotifyUser
+:SpotifyUser rdf:type owl:Class ;
+             rdfs:subClassOf :SpotifyEntry .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
