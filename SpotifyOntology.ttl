@@ -4,6 +4,7 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix mo: <http://purl.org/ontology/mo/> .
 @base <http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#> .
 
 <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/2d7da4ca6a37cc74686eb363cc8b9d94f9f0fd6d/SpotifyOntology.ttl> rdf:type owl:Ontology .
@@ -199,7 +200,8 @@
 
 ###  http://musicbrainz.org/artist
 <http://musicbrainz.org/artist> rdf:type owl:Class ;
-                                rdfs:subClassOf :MusicBrainzClasses .
+                                rdfs:subClassOf :MusicBrainzClasses;
+                                rdfs:subClassOf mo:artist .
 
 
 ###  http://musicbrainz.org/track
@@ -208,11 +210,11 @@
 
 
 ###  http://purl.org/ontology/mo/MusicGroup
-<http://purl.org/ontology/mo/MusicGroup> rdf:type owl:Class .
+mo:MusicGroup rdf:type owl:Class .
 
 
 ###  http://purl.org/ontology/mo/SoloMusicArtist
-<http://purl.org/ontology/mo/SoloMusicArtist> rdf:type owl:Class .
+mo:SoloMusicArtist rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#Group
@@ -220,7 +222,7 @@
        owl:equivalentClass [ owl:intersectionOf ( <http://musicbrainz.org/artist>
                                                   [ rdf:type owl:Restriction ;
                                                     owl:onProperty <http://musicbrainz.org/artist#type> ;
-                                                    owl:allValuesFrom <http://purl.org/ontology/mo/MusicGroup>
+                                                    owl:allValuesFrom mo:MusicGroup
                                                   ]
                                                 ) ;
                              rdf:type owl:Class
@@ -236,7 +238,7 @@
             owl:equivalentClass [ owl:intersectionOf ( <http://musicbrainz.org/artist>
                                                        [ rdf:type owl:Restriction ;
                                                          owl:onProperty <http://musicbrainz.org/artist#type> ;
-                                                         owl:allValuesFrom <http://purl.org/ontology/mo/SoloMusicArtist>
+                                                         owl:allValuesFrom mo:SoloMusicArtist
                                                        ]
                                                      ) ;
                                   rdf:type owl:Class
