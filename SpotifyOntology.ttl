@@ -298,11 +298,10 @@ mo:SoloMusicArtist
 :SpotifyUser
     rdf:type            owl:Class ;
     rdfs:subClassOf     :SpotifyEntry ;
-    owl:equivalentClass [ owl:intersectionOf ( :MusicServiceUser [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty  ] ) ]
-
-        :MusicServiceUser
-        rdf:type        owl:Class .
+    owl:equivalentClass [ owl:intersectionOf ( :MusicServiceUser [ rdf:type       owl:Restriction ;
+                                                                   owl:onProperty :belongsToMusicPlatform ;
+                                                                   owl:hasValue   :Spotify ] ) ] ;
+    rdf:type            owl:Class .
 
 :UserAccountType
     rdf:type owl:Class .
