@@ -1,0 +1,40 @@
+@prefix rr:     <http://www.w3.org/ns/r2rml#>.
+@prefix rml:    <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql:     <http://semweb.mmlab.be/ns/ql#>.
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix schema: <http://schema.org/> .
+@prefix dc:     <http://purl.org/dc/terms/>.
+@prefix spoto:  <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#> .
+
+@base <http://Tracks.mappings.example.com/data/>.
+
+<#UserMapping>
+    a                     rr:TriplesMap ;
+    rml:logicalSource     [ rml:source               "Users.csv" ;
+                            rml:referenceFormulation ql:CSV ] ;
+    rr:subjectMap         [ rml:reference "User_ID" ;
+                            rr:class      spoto:SpotifyUser ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:age ;
+                            rr:objectMap [ rml:reference "Age" ;
+                                           rr:datatype   xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:belongsToMusicPlatform ;
+                            rr:objectMap [ rr:template
+                                                   "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#{Streaming Platform}" ] ] ;
+
+    ########################################
+    rr:predicateObjectMap [ rr:predicate spoto:isPartOf ;
+                            rr:objectMap [ rr:template "https://open.spotify.com/album/{album_id}" ] ] ;
+    # Temporarily just dump the artist ids list. Will be fixed later by RDF4J.
+    rr:predicateObjectMap [ rr:predicate spoto:madeBy ;
+                            rr:objectMap [ rml:reference "artist_ids" ; ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:trackNumber ;
+                            rr:objectMap [ rml:reference "track_number" ;
+                                           rr:datatype   xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:explicit ;
+                            rr:objectMap [ rml:reference "explicit" ;
+                                           rr:datatype   xsd:boolean ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:danceability ;
+                            rr:objectMap [ rml:reference "danceability" ;
+                                           rr:datatype   xsd:double ] ]
+.
