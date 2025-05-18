@@ -1,13 +1,14 @@
-@prefix rr:     <http://www.w3.org/ns/r2rml#>.
-@prefix rml:    <http://semweb.mmlab.be/ns/rml#>.
-@prefix ql:     <http://semweb.mmlab.be/ns/ql#>.
-@prefix xsd:    <http://www.w3.org/2001/XMLSchema#>.
-@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix schema: <http://schema.org/> .
-@prefix dc:     <http://purl.org/dc/terms/>.
-@prefix spoto:  <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#> .
+@prefix rr:      <http://www.w3.org/ns/r2rml#>.
+@prefix rml:     <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql:      <http://semweb.mmlab.be/ns/ql#>.
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix schema:  <http://schema.org/> .
+@prefix dc:      <http://purl.org/dc/terms/>.
+@prefix spoto:   <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#> .
+@prefix spotart: <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/ArtistTriplets.ttl#> .
 
-@base <http://Tracks.mappings.example.com/data/>.
+@base <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/UsersTriplets.ttl#>.
 
 <#UserMapping>
     a                     rr:TriplesMap ;
@@ -21,20 +22,25 @@
     rr:predicateObjectMap [ rr:predicate spoto:belongsToMusicPlatform ;
                             rr:objectMap [ rr:template
                                                    "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#{Streaming Platform}" ] ] ;
-
-    ########################################
-    rr:predicateObjectMap [ rr:predicate spoto:isPartOf ;
-                            rr:objectMap [ rr:template "https://open.spotify.com/album/{album_id}" ] ] ;
-    # Temporarily just dump the artist ids list. Will be fixed later by RDF4J.
-    rr:predicateObjectMap [ rr:predicate spoto:madeBy ;
-                            rr:objectMap [ rml:reference "artist_ids" ; ] ] ;
-    rr:predicateObjectMap [ rr:predicate spoto:trackNumber ;
-                            rr:objectMap [ rml:reference "track_number" ;
-                                           rr:datatype   xsd:integer ] ] ;
-    rr:predicateObjectMap [ rr:predicate spoto:explicit ;
-                            rr:objectMap [ rml:reference "explicit" ;
-                                           rr:datatype   xsd:boolean ] ] ;
-    rr:predicateObjectMap [ rr:predicate spoto:danceability ;
-                            rr:objectMap [ rml:reference "danceability" ;
-                                           rr:datatype   xsd:double ] ]
+    rr:predicateObjectMap [ rr:predicate spoto:country ;
+                            rr:objectMap [ rr:template
+                                                   "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#{Country}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:topGenre ;
+                            rr:objectMap [ rr:template
+                                                   "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#{Top Genre}_Music_Genre" ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:minutesStreamedPerDay ;
+                            rr:objectMap [ rml:reference "Minutes Streamed Per Day" ;
+                                           rr:datatype   xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:totalLikes ;
+                            rr:objectMap [ rml:reference "Number of Songs Liked" ;
+                                           rr:datatype   xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:mostPlayedArtist ;
+                            rr:objectMap [ rr:template
+                                                   "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/ArtistTriplets.ttl#{Most Played Artist}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:subType ;
+                            rr:objectMap [ rr:template
+                                                   "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#{Subscription Type}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate spoto:listeningTimeOfDay ;
+                            rr:objectMap [ rr:template
+                                                   "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#{Listening Time (Morning/Afternoon/Night)}" ] ] ;
 .

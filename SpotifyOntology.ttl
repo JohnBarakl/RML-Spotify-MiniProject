@@ -40,19 +40,18 @@
     rdfs:domain   :SpotifyArtist ;
     rdfs:range    :SpotifyTrack .
 
-
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#madeBy
 :madeBy
     rdf:type    owl:ObjectProperty ;
     rdfs:domain :SpotifyTrack ;
     rdfs:range  :SpotifyArtist .
 
-
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#mostPlayedArtist
 :mostPlayedArtist
     rdf:type    owl:ObjectProperty ;
     rdfs:domain :SpotifyUser ;
     rdfs:range  :SpotifyArtist .
+
 
 :belongsToMusicPlatform
     rdf:type    owl:ObjectProperty ;
@@ -97,12 +96,16 @@
     rdfs:domain :SpotifyArtist ;
     rdfs:range  xsd:integer .
 
-
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#artistPopularity
 :artistPopularity
     rdf:type    owl:DatatypeProperty ;
     rdfs:domain :SpotifyArtist ;
     rdfs:range  xsd:integer .
+
+:artistName
+    rdf:type    owl:DatatypeProperty ;
+    rdfs:domain :SpotifyArtist ;
+    rdfs:range  xsd:string .
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#danceability
 :danceability
@@ -120,7 +123,7 @@
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#listeningTime
 :listeningTimeOfDay
-    rdf:type    owl:DatatypeProperty ;
+    rdf:type    owl:ObjectProperty ;
     rdfs:domain :SpotifyUser ;
     rdfs:range  [ rdf:type  rdfs:Datatype ;
                   owl:oneOf [ rdf:type  rdf:List ;
@@ -133,10 +136,16 @@
 
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#minutesStreamed
-:minutesStreamed
+:minutesStreamedPerDay
     rdf:type    owl:DatatypeProperty ;
     rdfs:domain :SpotifyUser ;
     rdfs:range  xsd:integer .
+
+
+:mostPlayedArtistName
+    rdf:type    owl:ObjectProperty ;
+    rdfs:domain :SpotifyUser ;
+    rdfs:range  xsd:string .
 
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#releaseDate
@@ -147,7 +156,7 @@
 
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#spotifyUri
-:spotifyUri
+:spotifyURL
     rdf:type    owl:DatatypeProperty ;
     rdfs:domain :SpotifyEntry ;
     rdfs:range  xsd:string .
@@ -155,7 +164,7 @@
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#subType
 :subType
-    rdf:type    owl:DatatypeProperty ;
+    rdf:type    owl:ObjectProperty ;
     rdfs:domain :SpotifyUser ;
     rdfs:range  [ rdf:type  rdfs:Datatype ;
                   owl:oneOf [ rdf:type  rdf:List ;
@@ -178,17 +187,46 @@
     rdfs:domain :SpotifyUser ;
     rdfs:range  xsd:integer .
 
+:createdByUser
+    rdf:type    owl:ObjectProperty ;
+    rdfs:domain :SpotifyPlaylist ;
+    rdfs:range  :SpotifyUser .
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#trackName
+
+
+:entryName
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf rdfs:label ;
+    rdfs:domain        :SpotifyEntry ;
+    rdfs:range         xsd:string .
+
 :trackName
     rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf :entryName ;
     rdfs:subPropertyOf rdfs:label ;
     rdfs:domain        :SpotifyTrack ;
     rdfs:range         xsd:string .
 
+:collectionName
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf :entryName ;
+    rdfs:domain        :SpotifyCollection ;
+    rdfs:range         xsd:string .
+
+:playlistDescription
+    rdf:type           owl:DatatypeProperty ;
+    rdfs:subPropertyOf :entryName ;
+    rdfs:domain        :SpotifyPlaylist ;
+    rdfs:range         xsd:string .
 
 ###  http://www.semanticweb.org/spkar/ontologies/2025/3/untitled-ontology-8#trackNumber
 :trackNumber
+    rdf:type    owl:DatatypeProperty ;
+    rdfs:domain :SpotifyCollection ;
+    rdfs:range  xsd:integer .
+
+:playlistFollowers
     rdf:type    owl:DatatypeProperty ;
     rdfs:domain :SpotifyCollection ;
     rdfs:range  xsd:integer .
@@ -310,12 +348,14 @@ mo:SoloMusicArtist
 #    Objects
 #################################################################
 
+# Account Types.
 :Free
     a :UserAccountType .
 
 :Premium
     a :UserAccountType .
 
+# Music Streaming Platforms.
 :Spotify
     a          :MusicStreamingPlatform ;
     owl:sameAs dbr:Spotify .
@@ -323,12 +363,12 @@ mo:SoloMusicArtist
 :AmazonMusic
     a          :MusicStreamingPlatform ;
     owl:sameAs dbr:Amazon_Music ;
-    owl:sameAs <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#Amazon%20Music> ; . # Provide an alternative URI with space.
+    owl:sameAs <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#Amazon%20Music> . # Provide an alternative URI with space.
 
 :AppleMusic
     a          :MusicStreamingPlatform ;
     owl:sameAs dbr:Apple_Music ;
-    owl:sameAs <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#Apple%20Music> ; .
+    owl:sameAs <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#Apple%20Music> .
 
 :Tidal
     a          :MusicStreamingPlatform ;
@@ -338,5 +378,88 @@ mo:SoloMusicArtist
     a          :MusicStreamingPlatform ;
     owl:sameAs dbr:Deezer .
 
+# Hardcoded Countries.
+:USA
+    a          dbo:Country ;
+    owl:sameAs dbr:United_States .
+
+:Brazil
+    a          dbo:Country ;
+    owl:sameAs dbr:Brazil .
+
+:Australia
+    a          dbo:Country ;
+    owl:sameAs dbr:Australia .
+
+:South_Korea
+    a          dbo:Country ;
+    owl:sameAs dbr:South_Korea ;
+    owl:sameAs <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#South%20Korea> .
+
+:Canada
+    a          dbo:Country ;
+    owl:sameAs dbr:Canada .
+
+:UK
+    a          dbo:Country ;
+    owl:sameAs dbr:United_Kingdom .
+
+:India
+    a          dbo:Country ;
+    owl:sameAs dbr:India .
+
+:Germany
+    a          dbo:Country ;
+    owl:sameAs dbr:Germany .
+
+:Japan
+    a          dbo:Country ;
+    owl:sameAs dbr:Japan .
+
+:France
+    a          dbo:Country ;
+    owl:sameAs dbr:France .
+
+# Music Genres.
+:Reggae_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Reggae .
+
+:Country_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Country_music .
+
+:Pop_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Pop_music .
+
+:EDM_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Electronic_dance_music .
+
+:Classical_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Classical_music .
+
+:Metal_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Heavy_metal_music .
+
+:Rock_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Rock_music .
+
+:Hip-Hop_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Hip-hop .
+
+:RnB_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Rhythm_and_blues ;
+    owl:sameAs <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#R%26B> .
+
+:Jazz_Music_Genre
+    a          dbo:MusicGenre ;
+    owl:sameAs dbr:Jazz .
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

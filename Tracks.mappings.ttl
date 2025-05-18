@@ -5,9 +5,10 @@
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix schema: <http://schema.org/> .
 @prefix dc:     <http://purl.org/dc/terms/>.
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix spoto:  <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#> .
 
-@base <http://Tracks.mappings.example.com/data/>.
+@base <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/TracksTriplets.ttl#>.
 
 <#TrackMapping>
     a                     rr:TriplesMap ;
@@ -17,13 +18,19 @@
                             rr:class    spoto:SpotifyTrack ] ;
     rr:predicateObjectMap [ rr:predicate spoto:trackName ;
                             rr:objectMap [ rml:reference "name" ] ] ;
-    rr:predicateObjectMap [ rr:predicate spoto:spotifyUri ;
+    rr:predicateObjectMap [ rr:predicate spoto:spotifyURL ;
                             rr:objectMap [ rr:template "https://open.spotify.com/track/{id}" ] ] ;
+    # Give every track a secondary URI, the one defined as a Spotify URI for spotify objects: "spotify:track:{ID}".
+    rr:predicateObjectMap [ rr:predicate owl:sameAs ;
+                            rr:objectMap [ rr:template "https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/TracksTriplets.ttl#spotify:track:{id}"] ] ;
     rr:predicateObjectMap [ rr:predicate spoto:isPartOf ;
                             rr:objectMap [ rr:template "https://open.spotify.com/album/{album_id}" ] ] ;
     # Temporarily just dump the artist ids list. Will be fixed later by RDF4J.
-    rr:predicateObjectMap [ rr:predicate spoto:madeBy ;
+    rr:predicateObjectMap [ rr:predicate spoto:TEMPmadeBy ;
                             rr:objectMap [ rml:reference "artist_ids" ; ] ] ;
+    # Temporarily just dump the artist names. Will be fixed later by RDF4J.
+    rr:predicateObjectMap [ rr:predicate spoto:TEMPmadeByName ;
+                            rr:objectMap [ rml:reference "artists" ; ] ] ;
     rr:predicateObjectMap [ rr:predicate spoto:trackNumber ;
                             rr:objectMap [ rml:reference "track_number" ;
                                            rr:datatype   xsd:integer ] ] ;
