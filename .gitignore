@@ -1,5 +1,5 @@
-/Playlists_Tracks.csv
-/Users.csv
+/src/src/main/resources/raw_data/Playlists_Tracks.csv
+/src/src/main/resources/raw_data/Users.csv
 /TracksTriplets.ttl
-/Playlists.csv
-/Tracks.csv
+/src/src/main/resources/raw_data/Playlists.csv
+/src/src/main/resources/raw_data/Tracks.csv
