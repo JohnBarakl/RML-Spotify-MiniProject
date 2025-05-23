@@ -28,16 +28,24 @@ public class ArtistsExtraProcessing extends BaseExtraProcessing {
 
     @Override
     public List<Statement> processRow(CSVRecord row) {
+        // As the subject, use the URI of the artist as present in the CSV. It has the format of "spotify:artist:{id}"
         IRI artistIRI = Values.iri(this.base, row.get("artist_uri"));
 
+        // Extract the raw ID from the URI and use it to form the URL to Spotify.
         String artistURL = "https://open.spotify.com/track/"+ row.get("artist_uri").substring(15);
 
+        // Create a temporary model and put the triplet into it
         Model tempModel = new TreeModel();
         tempModel.add(artistIRI, spotifyURL, Values.literal(artistURL));
 
+        // Return the collection of triplets generated as a list.
         return List.of(tempModel.toArray(new Statement[0]));
     }
 
+    /**
+     * A main method used to test the validity of the extraction. Stores extracted triples in the "rdf_output_turtle.ttl" file.
+     * @param args
+     */
     public static void main(String[] args) {
         ArtistsExtraProcessing artistsProcessor = new ArtistsExtraProcessing("raw_data/artists.csv", "http://example.com#");
         List<Statement> extracted_statements = artistsProcessor.processCSV();

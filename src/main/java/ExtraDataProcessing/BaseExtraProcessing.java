@@ -71,6 +71,7 @@ public abstract class BaseExtraProcessing {
             ArrayList<Statement> collectedStatements = new ArrayList<>();
             int i = 1;
             for (CSVRecord record : records) {
+                // Use the overloaded processRow method to process the row. This allows reusing the same base code for all CSV files.
                 collectedStatements.addAll(this.processRow(record));
 
                 System.out.printf("\rProcessed %d rows from the %s file. Total triples extracted: %d", i++, this.csvFilePath, collectedStatements.size());
