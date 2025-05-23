@@ -6,9 +6,9 @@
 @prefix schema: <http://schema.org/> .
 @prefix dc:     <http://purl.org/dc/terms/>.
 @prefix owl:    <http://www.w3.org/2002/07/owl#> .
-@prefix spoto:  <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#> .
+@prefix spoto:  <https://github.com/JohnBarakl/RML-Spotify-MiniProject#> .
 
-@base <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/TracksTriplets.ttl#>.
+@base <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>.
 
 <#TrackMapping2>
     a                     rr:TriplesMap ;
@@ -19,14 +19,6 @@
     rr:predicateObjectMap [ rr:predicate spoto:trackName ;
                             rr:objectMap [ rml:reference "name" ;
                                            rr:datatype   xsd:string ] ] ;
-    rr:predicateObjectMap [ rr:predicate spoto:TEMPisPartOf ;
-                            rr:objectMap [ rml:reference "playlist_uris" ] ] ;
-    # Temporarily just dump the artist ids list. Will be fixed later by RDF4J.
-    rr:predicateObjectMap [ rr:predicate spoto:TEMPmadeBy ;
-                            rr:objectMap [ rml:reference "artist_uris" ; ] ] ;
-    # Temporarily just dump the artist names. Will be fixed later by RDF4J.
-    rr:predicateObjectMap [ rr:predicate spoto:TEMPmadeByName ;
-                            rr:objectMap [ rml:reference "artist_names" ; ] ] ;
     rr:predicateObjectMap [ rr:predicate spoto:releaseDate ;
                             rr:objectMap [ rml:reference "release_date" ;
                                            rr:datatype   xsd:date ] ] ;

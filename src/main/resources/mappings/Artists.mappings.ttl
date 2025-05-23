@@ -5,9 +5,9 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix schema:  <http://schema.org/> .
 @prefix dc:      <http://purl.org/dc/terms/>.
-@prefix spoto:   <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/SpotifyOntology.ttl#> .
+@prefix spoto:   <https://github.com/JohnBarakl/RML-Spotify-MiniProject#> .
 
-@base <https://raw.githubusercontent.com/JohnBarakl/RML-Spotify-MiniProject/refs/heads/main/ArtistTriplets.ttl#>.
+@base <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>.
 
 <#ArtistMapping>
     a                     rr:TriplesMap ;
