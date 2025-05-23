@@ -17,10 +17,10 @@
                             rr:class      spoto:SpotifyPlaylist ] ;
     rr:predicateObjectMap [ rr:predicate spoto:collectionName ;
                             rr:objectMap [ rml:reference "name" ;
-                                           rr:datatype   xsd:int ] ] ;
+                                           rr:datatype   xsd:string  ] ] ;
     rr:predicateObjectMap [ rr:predicate spoto:playlistDescription ;
                             rr:objectMap [ rml:reference "description" ;
-                                           rr:datatype   xsd:int ] ] ;
+                                           rr:datatype   xsd:string ] ] ;
 
     rr:predicateObjectMap [ rr:predicate spoto:trackNumber ;
                             rr:objectMap [ rml:reference "n_tracks" ;
