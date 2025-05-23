@@ -32,7 +32,7 @@ public class ArtistsExtraProcessing extends BaseExtraProcessing {
         IRI artistIRI = Values.iri(this.base, row.get("artist_uri"));
 
         // Extract the raw ID from the URI and use it to form the URL to Spotify.
-        String artistURL = "https://open.spotify.com/track/"+ row.get("artist_uri").substring(15);
+        String artistURL = "https://open.spotify.com/artist/"+ row.get("artist_uri").substring(15);
 
         // Create a temporary model and put the triplet into it
         Model tempModel = new TreeModel();

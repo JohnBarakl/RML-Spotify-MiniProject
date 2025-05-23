@@ -2,8 +2,12 @@ package ExtraDataProcessing;
 
 import org.apache.commons.csv.*;
 import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.model.util.Values;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.Rio;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -62,9 +66,13 @@ public abstract class BaseExtraProcessing {
      */
     public abstract List<Statement> processRow(CSVRecord row);
 
+    /**
+     * Processes the CSV file whose path is given at construction.
+     * @return A list of extracted triplets (statements).
+     */
     public List<Statement> processCSV() {
         // Open CSV file and start reading.
-        try (Reader in = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(this.csvFilePath))) {
+        try (Reader in = new FileReader(this.csvFilePath)) {
             Iterable<CSVRecord> records = CSVFormat.EXCEL.builder().setHeader().setSkipHeaderRecord(true).build().parse(in);
 
             // For each record, extract triplets and collect them
@@ -84,6 +92,23 @@ public abstract class BaseExtraProcessing {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Processes the CSV file whose path is given at construction and writes a file with the output data at same directory
+     * as input with the given name.
+     */
+    public void processCSVToTtlFile(String outputFileName) throws IOException {
+        // Process the file as normal and collect the results in memory.
+        List<Statement> collectedStatements = this.processCSV();
+
+        // Load all triplets onto a model and dump that model to a .ttl file.
+        Model model = new TreeModel();
+        model.addAll(collectedStatements);
+
+        try (OutputStream outputStream = new FileOutputStream((new File(this.csvFilePath)).getParent() + "/" + outputFileName)) {
+            Rio.write(model, outputStream, RDFFormat.TURTLE);
         }
     }
 
