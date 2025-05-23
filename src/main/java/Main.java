@@ -55,17 +55,17 @@ public class Main {
         // Add the base ontology triples into the database.
         main.addTtlFileToGraphDB(main.getClass().getClassLoader().getResourceAsStream("ontology/SpotifyOntology.ttl"));
 
-//        // For all data files, map triplets out and add to the database.
-//        main.processWithRML("Artists.mappings", "raw_data");
-//        System.out.println("Done Artists.mappings");
-//        main.processWithRML("Playlists.mappings", "raw_data");
-//        System.out.println("Done Playlists.mappings");
-//        main.processWithRML("Playlists_Tracks.mappings", "raw_data");
-//        System.out.println("Done Playlists_Tracks.mappings");
-//        main.processWithRML("Tracks.mappings", "raw_data");
-//        System.out.println("Done Tracks.mappings");
-//        main.processWithRML("Users.mappings", "raw_data");
-//        System.out.println("Done Users.mappings");
+        // For all data files, map triplets out and add to the database.
+        main.processWithRML("Artists.mappings", "raw_data");
+        System.out.println("Done Artists.mappings");
+        main.processWithRML("Playlists.mappings", "raw_data");
+        System.out.println("Done Playlists.mappings");
+        main.processWithRML("Playlists_Tracks.mappings", "raw_data");
+        System.out.println("Done Playlists_Tracks.mappings");
+        main.processWithRML("Tracks.mappings", "raw_data");
+        System.out.println("Done Tracks.mappings");
+        main.processWithRML("Users.mappings", "raw_data");
+        System.out.println("Done Users.mappings");
 
         // Proceed with the extra triple extraction that could not be completed by RML alone.
         (new ArtistsExtraProcessing("raw_data/Artists.csv", "https://github.com/JohnBarakl/RML-Spotify-MiniProject#")).
