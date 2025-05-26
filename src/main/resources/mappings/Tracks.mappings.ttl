@@ -14,14 +14,14 @@
     a                     rr:TriplesMap ;
     rml:logicalSource     [ rml:source               "Tracks.csv" ;
                             rml:referenceFormulation ql:CSV ] ;
-    rr:subjectMap         [ rr:template "spotify:track:{id}" ;
+    rr:subjectMap         [ rr:template "https://github.com/JohnBarakl/RML-Spotify-MiniProject#spotify:track:{id}" ;
                             rr:class    spoto:SpotifyTrack ] ;
     rr:predicateObjectMap [ rr:predicate spoto:trackName ;
                             rr:objectMap [ rml:reference "name" ] ] ;
     rr:predicateObjectMap [ rr:predicate spoto:spotifyURL ;
                             rr:objectMap [ rr:template "https://open.spotify.com/track/{id}" ] ] ;
     rr:predicateObjectMap [ rr:predicate spoto:isPartOf ;
-                            rr:objectMap [ rr:template "spotify:album:{album_id}" ] ] ;
+                            rr:objectMap [ rr:template "https://github.com/JohnBarakl/RML-Spotify-MiniProject#spotify:album:{album_id}" ] ] ;
     rr:predicateObjectMap [ rr:predicate spoto:trackNumber ;
                             rr:objectMap [ rml:reference "track_number" ;
                                            rr:datatype   xsd:integer ] ] ;

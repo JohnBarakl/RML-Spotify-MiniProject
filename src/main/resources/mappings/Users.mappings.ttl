@@ -13,7 +13,7 @@
     a                     rr:TriplesMap ;
     rml:logicalSource     [ rml:source               "Users.csv" ;
                             rml:referenceFormulation ql:CSV ] ;
-    rr:subjectMap         [ rml:reference "User_ID" ;
+    rr:subjectMap         [ rr:template "https://github.com/JohnBarakl/RML-Spotify-MiniProject#{User_ID}" ;
                             rr:class      spoto:SpotifyUser ] ;
     rr:predicateObjectMap [ rr:predicate spoto:age ;
                             rr:objectMap [ rml:reference "Age" ;

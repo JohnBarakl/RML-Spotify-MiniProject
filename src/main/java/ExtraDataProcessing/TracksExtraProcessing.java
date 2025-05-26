@@ -33,7 +33,7 @@ public class TracksExtraProcessing extends BaseExtraProcessing {
 
         // As the subject, create a URI of the track based on the ID present in the CSV.
         // This is the format the the rest of the CSVs use. The format is "spotify:track:{id}"
-        IRI trackIRI = Values.iri(base, "spotify:track:" + row.get("id"));
+        IRI trackIRI = Values.iri(base, "spotify%3Atrack%3A" + row.get("id"));
 
         // Extract the raw ID from the URI and use it to form the URL to Spotify. Add it as a triplet.
         String trackURL = "https://open.spotify.com/track/" + row.get("id");
@@ -64,7 +64,7 @@ public class TracksExtraProcessing extends BaseExtraProcessing {
 
             // As the subject, create a URI of the artist based on the artist ID present in the CSV.
             // The format is "spotify:track:{id}"
-            IRI artistIRI = Values.iri(base, "spotify:artist:" + artistID);
+            IRI artistIRI = Values.iri(base, "spotify%3Aartist%3A" + artistID);
             // Use the raw ID from the URI and form the URL to Spotify.
             String artistURL = "https://open.spotify.com/artist/" + artistID;
             // URI linking the track to its artist.

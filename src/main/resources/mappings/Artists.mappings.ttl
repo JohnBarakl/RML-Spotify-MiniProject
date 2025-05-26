@@ -13,7 +13,7 @@
     a                     rr:TriplesMap ;
     rml:logicalSource     [ rml:source               "Artists.csv" ;
                             rml:referenceFormulation ql:CSV ] ;
-    rr:subjectMap         [ rml:reference "artist_uri" ;
+    rr:subjectMap         [ rr:template "https://github.com/JohnBarakl/RML-Spotify-MiniProject#{artist_uri}" ;
                             rr:class      spoto:SpotifyArtist ] ;
     rr:predicateObjectMap [ rr:predicate spoto:artistPopularity ;
                             rr:objectMap [ rml:reference "artist_popularity" ;

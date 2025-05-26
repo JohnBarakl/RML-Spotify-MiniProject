@@ -29,7 +29,7 @@ public class ArtistsExtraProcessing extends BaseExtraProcessing {
     @Override
     public List<Statement> processRow(CSVRecord row) {
         // As the subject, use the URI of the artist as present in the CSV. It has the format of "spotify:artist:{id}"
-        IRI artistIRI = Values.iri(this.base, row.get("artist_uri"));
+        IRI artistIRI = Values.iri(this.base, row.get("artist_uri").replaceAll(":", "%3A"));
 
         // Extract the raw ID from the URI and use it to form the URL to Spotify.
         String artistURL = "https://open.spotify.com/artist/"+ row.get("artist_uri").substring(15);

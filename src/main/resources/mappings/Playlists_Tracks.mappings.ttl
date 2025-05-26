@@ -14,7 +14,7 @@
     a                     rr:TriplesMap ;
     rml:logicalSource     [ rml:source               "Playlists_Tracks.csv" ;
                             rml:referenceFormulation ql:CSV ] ;
-    rr:subjectMap         [ rml:reference "track_uri" ;
+    rr:subjectMap         [ rr:template "https://github.com/JohnBarakl/RML-Spotify-MiniProject#{track_uri}";
                             rr:class      spoto:SpotifyTrack ] ;
     rr:predicateObjectMap [ rr:predicate spoto:trackName ;
                             rr:objectMap [ rml:reference "name" ;

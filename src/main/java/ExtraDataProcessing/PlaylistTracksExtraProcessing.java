@@ -37,7 +37,7 @@ public class PlaylistTracksExtraProcessing extends BaseExtraProcessing {
         Model tempModel = new TreeModel();
 
         // As the subject, use the URI of the track as present in the CSV. It has the format of "spotify:track:{id}"
-        IRI trackIRI = Values.iri(base, row.get("track_uri"));
+        IRI trackIRI = Values.iri(base, row.get("track_uri").replaceAll(":", "%3A"));
 
         // Extract the raw ID from the URI and use it to form the URL to Spotify. Add it as a triplet.
         String trackURL = "https://open.spotify.com/track/" + row.get("track_uri").substring(14);
@@ -68,7 +68,7 @@ public class PlaylistTracksExtraProcessing extends BaseExtraProcessing {
             String artistNameString = artistNames.get(i);
 
             // Use the URI of the artist as present in the CSV. It has the format of "spotify:artist:{id}"
-            IRI artistIRI = Values.iri(base, artistID);
+            IRI artistIRI = Values.iri(base, artistID.replaceAll(":", "%3A"));
 
             // URI linking the track to its artist.
             tempModel.add(trackIRI, madeBy, artistIRI);
