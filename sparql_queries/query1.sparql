@@ -1,7 +1,11 @@
 PREFIX : <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>
-select ?spotifyTrack where {
+select ?artist ?spotifyTrack ?trackName where {
+
     ?artist a :SpotifyArtist ;
     	:artistName "Taylor Swift" .
+
     ?artist :made ?spotifyTrack .
+    ?spotifyTrack :trackName ?trackName .
+
 }
 LIMIT 5
