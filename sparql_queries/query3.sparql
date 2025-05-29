@@ -7,3 +7,4 @@ select ?SpotifyPlaylist ?collectionName ?playlistFollowers ?trackNumber where {
     FILTER (?playlistFollowers > 300)
     FILTER (?trackNumber > 100)
 }
+LIMIT 5

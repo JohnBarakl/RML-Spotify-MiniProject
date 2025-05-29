@@ -4,3 +4,4 @@ select ?spotifyTrack where {
     	:artistName "Taylor Swift" .
     ?artist :made ?spotifyTrack .
 }
+LIMIT 5

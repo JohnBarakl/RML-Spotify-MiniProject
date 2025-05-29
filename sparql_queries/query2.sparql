@@ -8,3 +8,4 @@ select ?spotifyTrack ?trackName ?danceability ?releaseDate where {
     FILTER (?danceability > 0.7)
     FILTER (?releaseDate > "2016-07-20"^^xsd:dateTime)
 }
+LIMIT 5

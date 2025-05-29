@@ -7,3 +7,4 @@ select ?artist ?name (COUNT(*) AS ?numOfTracks) where {
 GROUP BY ?artist ?name
 HAVING (?numOfTracks > 200)
 ORDER BY DESC(?numOfTracks)
+LIMIT 5

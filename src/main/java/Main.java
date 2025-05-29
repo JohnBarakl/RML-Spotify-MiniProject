@@ -94,14 +94,14 @@ public class Main {
         main.addTtlFileToGraphDB("raw_data/TracksOutputTriplesExtra.ttl");
         System.out.println("Done TracksOutputTriplesExtra.ttl");
 
+        System.out.println("Completed Uploads");
+
         // Execute SPARQL results and prints the outputs to the screen.
         main.processSparqlQuery("sparql_queries/query1.sparql");
         main.processSparqlQuery("sparql_queries/query2.sparql");
         main.processSparqlQuery("sparql_queries/query3.sparql");
         main.processSparqlQuery("sparql_queries/query4.sparql");
         main.processSparqlQuery("sparql_queries/query5.sparql");
-
-        System.out.println("Completed Uploads");
 
         main.teardown();
     }

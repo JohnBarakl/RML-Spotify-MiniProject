@@ -10,3 +10,4 @@ GROUP BY ?album
 }
 GROUP BY ?album
 ORDER BY DESC(?averageExplicit)
+LIMIT 5
