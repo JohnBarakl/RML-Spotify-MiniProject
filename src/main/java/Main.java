@@ -3,8 +3,7 @@ import ExtraDataProcessing.PlaylistTracksExtraProcessing;
 import ExtraDataProcessing.PlaylistsExtraProcessing;
 import ExtraDataProcessing.TracksExtraProcessing;
 import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.query.GraphQuery;
-import org.eclipse.rdf4j.query.GraphQueryResult;
+import org.eclipse.rdf4j.query.*;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -164,19 +163,16 @@ public class Main {
         System.out.println("Results:");
         System.out.println("-----------------------------------");
 
-        // Prepare the query.
-        GraphQuery query = graphDBConnection.prepareGraphQuery(sparqlQuery);
-
-        // Prepare to write the results to stdio.
-        RDFHandler turtleWriter = Rio.createWriter(RDFFormat.TURTLE, System.out);
-
         // Evaluate query and print all results to output.
-        query.evaluate(turtleWriter);
-
-        try (GraphQueryResult result = query.evaluate()) {
-            while (result.hasNext()) {
-                Statement st = result.next();
-                System.out.println(st);
+        TupleQuery tQuery = graphDBConnection.prepareTupleQuery(sparqlQuery);
+        try (TupleQueryResult result = tQuery.evaluate()) {
+            // Iterate over all solutions in the result
+            for (BindingSet solution : result) {
+                // Dynamically get and print the value of each variable binding in the solution
+                for (String bindingName : solution.getBindingNames()) {
+                    System.out.println("?" + bindingName + " = " + solution.getValue(bindingName));
+                }
+                System.out.println("---"); // Separator for each result row
             }
         }
 
