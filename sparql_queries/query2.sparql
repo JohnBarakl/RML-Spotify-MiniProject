@@ -1,11 +1,12 @@
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX : <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>
-select ?spotifyTrack ?trackName ?danceability ?releaseDate where {
-	?spotifyTrack a :SpotifyTrack;
-    	:danceability ?danceability;
-    	:releaseDate ?releaseDate ;
-        :trackName ?trackName .
-    FILTER (?danceability > 0.7)
-    FILTER (?releaseDate > "2016-07-20"^^xsd:dateTime)
+PREFIX : <https://github.com/JohnBarakl/RML-Spotify-MiniProject#> 
+
+select ?user ?artist where {
+    
+	?user a :SpotifyUser;
+    	:listeningTimeOfDay :Afternoon;
+    	:minutesStreamedPerDay ?minutes ;
+        :country :Japan ;
+    	:mostPlayedArtist ?artist
+    FILTER (?minutes > 200)
 }
 LIMIT 5
