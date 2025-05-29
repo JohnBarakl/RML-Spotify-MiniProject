@@ -2,11 +2,18 @@ import ExtraDataProcessing.ArtistsExtraProcessing;
 import ExtraDataProcessing.PlaylistTracksExtraProcessing;
 import ExtraDataProcessing.PlaylistsExtraProcessing;
 import ExtraDataProcessing.TracksExtraProcessing;
+import org.eclipse.rdf4j.model.Statement;
+import org.eclipse.rdf4j.query.GraphQuery;
+import org.eclipse.rdf4j.query.GraphQueryResult;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.http.HTTPRepository;
 import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.RDFHandler;
+import org.eclipse.rdf4j.rio.Rio;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,6 +95,12 @@ public class Main {
         main.addTtlFileToGraphDB("raw_data/TracksOutputTriplesExtra.ttl");
         System.out.println("Done TracksOutputTriplesExtra.ttl");
 
+        // Execute SPARQL results and prints the outputs to the screen.
+        main.processSparqlQuery("sparql_queries/query1.sparql");
+        main.processSparqlQuery("sparql_queries/query2.sparql");
+        main.processSparqlQuery("sparql_queries/query3.sparql");
+        main.processSparqlQuery("sparql_queries/query4.sparql");
+        main.processSparqlQuery("sparql_queries/query5.sparql");
 
         System.out.println("Completed Uploads");
 
@@ -132,5 +145,44 @@ public class Main {
         // Extract triplets to file using RML. The return value is the file to be added in the database.
         String ttlFilePath = rmlMapper.extractTriples(templateName, dataDirectoryPath);
         addTtlFileToGraphDB(ttlFilePath);
+    }
+
+    /**
+     * Loads, processes and executes a SPARQL query from a given file path. It then prints the results in the standard output.
+     *
+     * @param sparqlQueryFilePath The path to the file containing the SPARQL query.
+     */
+    private void processSparqlQuery(String sparqlQueryFilePath) throws IOException {
+        // Read the whole file from the path given as a string for the whole query.
+        String sparqlQuery = Files.readString(Paths.get(sparqlQueryFilePath));
+
+        // Print query to output.
+        System.out.println("Query at " + sparqlQueryFilePath);
+        System.out.println("-----------------------------------");
+        System.out.println(sparqlQuery);
+        System.out.println("-----------------------------------");
+        System.out.println("Results:");
+        System.out.println("-----------------------------------");
+
+        // Prepare the query.
+        GraphQuery query = graphDBConnection.prepareGraphQuery(sparqlQuery);
+
+        // Prepare to write the results to stdio.
+        RDFHandler turtleWriter = Rio.createWriter(RDFFormat.TURTLE, System.out);
+
+        // Evaluate query and print all results to output.
+        query.evaluate(turtleWriter);
+
+        try (GraphQueryResult result = query.evaluate()) {
+            while (result.hasNext()) {
+                Statement st = result.next();
+                System.out.println(st);
+            }
+        }
+
+        System.out.println("-----------------------------------");
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
 }

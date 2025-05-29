@@ -1,0 +1,9 @@
+PREFIX : <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>
+select ?SpotifyPlaylist ?collectionName ?playlistFollowers ?trackNumber where {
+	?SpotifyPlaylist a :SpotifyPlaylist;
+    	:collectionName ?collectionName;
+    	:playlistFollowers ?playlistFollowers ;
+        :trackNumber ?trackNumber .
+    FILTER (?playlistFollowers > 300)
+    FILTER (?trackNumber > 100)
+}

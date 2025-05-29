@@ -1,0 +1,12 @@
+PREFIX : <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>
+select ?album (AVG(?totalExplicit) as ?averageExplicit) where {
+    select ?album (COUNT(?track) AS ?totalExplicit) where {
+        ?album a :SpotifyCollection .
+        ?track :isPartOf ?album ;
+            :explicit ?explicit .
+        FILTER(STR(?explicit) = "True")
+    }
+GROUP BY ?album
+}
+GROUP BY ?album
+ORDER BY DESC(?averageExplicit)

@@ -1,0 +1,6 @@
+PREFIX : <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>
+select ?spotifyTrack where {
+    ?artist a :SpotifyArtist ;
+    	:artistName "Taylor Swift" .
+    ?artist :made ?spotifyTrack .
+}

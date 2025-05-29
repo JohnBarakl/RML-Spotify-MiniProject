@@ -1,0 +1,9 @@
+PREFIX : <https://github.com/JohnBarakl/RML-Spotify-MiniProject#>
+select ?artist ?name (COUNT(*) AS ?numOfTracks) where {
+	?artist a :SpotifyArtist;
+        :artistName ?name ;
+        :made ?track .
+}
+GROUP BY ?artist ?name
+HAVING (?numOfTracks > 200)
+ORDER BY DESC(?numOfTracks)
